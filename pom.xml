@@ -30,11 +30,11 @@
             <artifactId>hadoop-common</artifactId>
             <version>2.9.0</version>
         </dependency>
-        <dependency>
+        <!-- <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-core</artifactId>
             <version>1.2.1</version>
-        </dependency>
+        </dependency> -->
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-hdfs</artifactId>
@@ -45,6 +45,13 @@
             <artifactId>hadoop-auth</artifactId>
             <version>2.9.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-mapreduce-client-jobclient</artifactId>
+            <version>2.9.0</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
 
 

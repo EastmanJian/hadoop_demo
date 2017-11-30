@@ -8,6 +8,7 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.MRJobConfig;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -74,6 +75,8 @@ public class WordCount {
         /**
          * The Reducer implementation, via the reduce method just sums up the values, which are the occurrence counts
          * for each key (i.e. words in this example).
+         * The framework groups Reducer inputs by keys (since different mappers may have output the same key) in the
+         * sort stage before reduce() is called.
          *
          * @param key - KEYIN
          * @param values - Iterable<VALUEIN>
@@ -89,6 +92,7 @@ public class WordCount {
             }
             result.set(sum);
             context.write(key, result);
+
         }
     }
 
@@ -141,6 +145,7 @@ public class WordCount {
         for (int i = 0; i < otherArgs.length - 1; ++i) {
             FileInputFormat.addInputPath(job, new Path(otherArgs[i]));
         }
+
         FileOutputFormat.setOutputPath(job,
                 new Path(otherArgs[otherArgs.length - 1]));
 
